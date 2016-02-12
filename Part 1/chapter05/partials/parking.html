@@ -1,0 +1,92 @@
+{{appTitle}}
+<br/>
+{{tick | date:"hh:mm:ss"}}
+<button ng-click="stopTicking()">Stop</button>
+<br/>
+<input 
+  type="text" 
+  ng-model="criteria"
+  ng-keydown="searchCarsByCriteria(criteria)"
+  placeholder="What are you looking for?"
+/>
+{{searchResult}}
+{{message}}
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>
+        <a href=""ng-click="field = 'plate'; order=!order">
+          Plate
+        </a>
+      </th>
+      <th>
+        <a href=""ng-click="field = 'color'; order=!order">
+          Color
+        </a>
+      </th>
+      <th>
+        <a href=""ng-click="field = 'entrance'; order=!order">
+          Entrance
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr 
+      ng-class="{selected: car.selected}" 
+      ng-repeat="car in cars | orderBy:field:order"
+ >
+   <td>
+        <input 
+          type="checkbox" 
+          ng-model="car.selected"
+        />
+      </td>
+      <td><a href="#/car/{{car.id}}">{{car.plate}}</a></td>
+      <td>{{car.color}}</td>
+      <td>{{car.entrance | date:'dd/MM/yyyy hh:mm'}}</td>
+    </tr>
+  </tbody>
+</table>
+<form name="carForm">
+  <input 
+    type="text"
+    name="plateField"
+    ng-model="car.plate" 
+    placeholder="What's the plate?"
+    ng-required="true"
+    ng-minlength="6"
+    ng-maxlength="10"
+    ng-pattern="/[A-Z]{3}[0-9]{3,7}/"
+  />
+  <select 
+    ng-model="car.color" 
+    ng-options="color for color in colors"
+  >
+    Pick a color
+  </select>
+  <button 
+    ng-click="park(car)" 
+    ng-disabled="carForm.$invalid"
+  >
+    Park
+  </button>
+</form>
+<alert 
+  ng-show="carForm.plateField.$dirty && carForm.plateField.$invalid" 
+  topic="Something went wrong!"
+>
+  <span ng-show="carForm.plateField.$error.required">
+    You must inform the plate of the car!
+  </span>
+  <span ng-show="carForm.plateField.$error.minlength">
+    The plate must have at least 6 characters!
+  </span>
+  <span ng-show="carForm.plateField.$error.maxlength">
+    The plate must have at most 10 characters!
+  </span>
+  <span ng-show="carForm.plateField.$error.pattern">
+    The plate must start with non-digits, followed by 4 to 7 numbers!
+  </span>
+</alert>

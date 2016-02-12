@@ -1,0 +1,42 @@
+.selected {
+  background-color: #FAFAD2;
+}
+   
+.alert {
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+  color: #B94A48;
+  padding: 20px;
+  border-radius: 5px;
+}
+   
+.alert-topic {
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+}
+   
+.alert-description {
+  font-size: 16px;
+}
+
+.accordion-item {
+  border: 1px solid #CCCCCC;
+  cursor: pointer;
+  background: -moz-linear-gradient(top, #CCCCCC, #EEEEEE);
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px 5px 0px 0px;
+  margin-top: 10px;
+}
+
+.accordion-description {
+  border: 1px dashed #CCCCCC;
+  border-top: 0px;
+  border-radius: 0px 0px 5px 5px;
+  background-color: #FFFFFF;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}

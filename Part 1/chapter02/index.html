@@ -1,0 +1,78 @@
+<!doctype html>
+<html ng-app="parking">
+  <head>
+ <title>[Packt] Parking</title>
+ <script src="lib/angular.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/controllers.js"></script>
+ <script src="js/directives.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/app.css">
+  </head>
+  <body ng-controller="parkingCtrl">
+    <h3 ng-bind="appTitle"></h3>
+    <div ng-show="cars.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Plate</th>
+            <th>Color</th>
+            <th>Entrance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr 
+            ng-class="{selected: car.selected}" 
+            ng-repeat="car in cars"
+          >
+            <td>
+              <input 
+                type="checkbox" 
+                ng-model="car.selected"
+              />
+            </td>
+            <td><span ng-bind="car.plate"></span></td>
+            <td><span ng-bind="car.color"></span></td>
+            <td><span ng-bind="car.entrance"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div ng-hide="cars.length > 0">
+      The parking lot is empty
+    </div>
+    <input 
+      type="text" 
+      ng-model="car.plate" 
+      placeholder="What's the plate?"
+    />
+    <select 
+      ng-model="car.color" 
+      ng-options="color for color in colors"
+    >
+      Pick a color
+    </select>
+    <button 
+      ng-click="park(car)" 
+      ng-disabled="!car.plate || !car.color"
+     >
+       Park
+    </button>
+
+    <alert topic="Something went wrong!">
+      You must inform the plate and the color of the car!
+    </alert>
+    
+    <accordion>
+      <accordion-item title="MMM-8790">
+        White - 10/10/2002 10:00
+      </accordion-item>
+      <accordion-item title="ABC-9954">
+        Black - 10/10/2002 10:36
+      </accordion-item>
+      <accordion-item title="XYZ-9768">
+        Blue - 10/10/2002 11:10
+      </accordion-item>
+    </accordion>
+  </body>
+</html>
